@@ -1,7 +1,6 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
 
@@ -118,6 +117,7 @@ app.get("/kingbypass", async (req, res) => {
 });
 
 // Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
