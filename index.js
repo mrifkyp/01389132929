@@ -1,9 +1,16 @@
 const express = require("express");
 const axios = require("axios");
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware untuk menangani favicon
+app.get("/favicon.ico", (req, res) => res.status(204)); // Mengembalikan status 204 No Content
 
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
@@ -104,7 +111,7 @@ app.get("/kingbypass", async (req, res) => {
 
     console.log("Success:", result);
 
-    // Send the success message to Discord
+    // Kirim pesan sukses ke Discord
     await axios.post(webhookURL, {
       content: `Success: ${result}`,
     });
@@ -117,7 +124,7 @@ app.get("/kingbypass", async (req, res) => {
   }
 });
 
-// Start the server
+// Mulai server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
