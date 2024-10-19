@@ -8,7 +8,7 @@ const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
   if (!link) {
-    return res.status(400).json({ warning: "Url Needed" });
+    return res.status(400).json({ result: "Url Needed" });
   }
 
   let result;
@@ -93,8 +93,8 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else {
       return res.status(400).json({
-        Note: "Url not supported to bypass",
-        Message: "Made by Dark",
+        result: "Url not supported to bypass",
+        credit: "Made by Dark",
       });
     }
 
@@ -104,7 +104,6 @@ app.get("/kingbypass", async (req, res) => {
 
     console.log("Success:", result);
 
-    // Send the success message to Discord
     await axios.post(webhookURL, {
       content: `Success: ${result}`,
     });
