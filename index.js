@@ -24,7 +24,8 @@ app.get("/kingbypass", async (req, res) => {
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
+    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=") ||
+               link.startsWith("https://gateway.platoboost.com/a/2?id=")) {
       const response = await axios.get(
         `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
       );
@@ -49,7 +50,18 @@ app.get("/kingbypass", async (req, res) => {
         `https://trigon.vercel.app/trigon?url=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://tora-scripts.com/") || link.startsWith("https://raw.githubusercontent.com/")) {
+    } else if (link.startsWith("https://getkey.relzscript.xyz/redirect.php?hwid=")) {
+      const response = await axios.get(
+        `https://zaneru-official.vercel.app/api/bypass/relzhub?link=${encodeURIComponent(link)}&api_key=zaneru-official`
+      );
+      result = response.data.key;
+    } else if (link.startsWith("https://nicuse.xyz/getkey")) {
+      const response = await axios.get(
+        `https://nicuse.vercel.app/nicuse?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
+      );
+      result = response.data.key;
+    } else if (link.startsWith("https://controlc.com/") || 
+               link.startsWith("https://raw.githubusercontent.com/")) {
       const response = await axios.get(
         `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
       );
@@ -85,7 +97,8 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://link-hub.net/") ||
       link.startsWith("https://best-links.org/") ||
       link.startsWith("https://justpaste.it/") ||
-      link.startsWith("https://pastehill.com/")
+      link.startsWith("https://pastehill.com/") ||
+      link.startsWith("https://linkvertise.com/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
