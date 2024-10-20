@@ -45,7 +45,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
       );
-      result = response.data.key;
+      result = response.data.decoded_url; // Mengambil decoded_url dari respons
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
       const response = await axios.get(
         `https://trigon.vercel.app/trigon?url=${encodeURIComponent(link)}`
