@@ -14,7 +14,6 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    // Bypass untuk individual API
     if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
@@ -41,11 +40,6 @@ app.get("/kingbypass", async (req, res) => {
         `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://loot-link.com/")) {
-      const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
-      );
-      result = response.data.decoded_url; // Mengambil decoded_url dari respons
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
       const response = await axios.get(
         `https://trigon.vercel.app/trigon?url=${encodeURIComponent(link)}`
@@ -67,6 +61,16 @@ app.get("/kingbypass", async (req, res) => {
         `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
       );
       result = response.data.key;
+    } else if (link.startsWith("https://loot-link.com/")) {
+      const response = await axios.get(
+        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}`
+      );
+      // Ambil hanya decoded_url dari respons
+      if (response.data.status === "success") {
+        result = response.data.decoded_url; // Mengambil decoded_url
+      } else {
+        return res.status(400).json({ error: "Failed to decode URL" });
+      }
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
@@ -103,11 +107,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
-      if (response.data.result) {
-        result = response.data.result; // Memperoleh hasil dari respons
-      } else {
-        result = response.data.key; // Jika tidak ada result, ambil key
-      }
+      result = response.data.result; // Mengambil hanya result dari response
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -133,7 +133,7 @@ app.get("/kingbypass", async (req, res) => {
   }
 });
 
-// Mulai server
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
