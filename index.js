@@ -14,6 +14,7 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
+    // Bypass untuk individual API
     if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
@@ -42,7 +43,7 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (link.startsWith("https://loot-link.com/")) {
       const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}`
+        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
       );
       result = response.data.key;
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
@@ -97,13 +98,16 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://link-hub.net/") ||
       link.startsWith("https://best-links.org/") ||
       link.startsWith("https://justpaste.it/") ||
-      link.startsWith("https://pastehill.com/") ||
-      link.startsWith("https://linkvertise.com/")
+      link.startsWith("https://pastehill.com/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.key;
+      if (response.data.result) {
+        result = response.data.result; // Memperoleh hasil dari respons
+      } else {
+        result = response.data.key; // Jika tidak ada result, ambil key
+      }
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -129,7 +133,7 @@ app.get("/kingbypass", async (req, res) => {
   }
 });
 
-// Start the server
+// Mulai server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
