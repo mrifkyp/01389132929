@@ -60,17 +60,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
       );
-      result = response.data.key;
-    } else if (link.startsWith("https://loot-link.com/")) {
-      const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}`
-      );
-      // Ambil hanya decoded_url dari respons
-      if (response.data.status === "success") {
-        result = response.data.decoded_url; // Mengambil decoded_url
-      } else {
-        return res.status(400).json({ error: "Failed to decode URL" });
-      }
+      result = response.data.Result; // Mengambil "Result" dari Quantum API
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
@@ -102,12 +92,13 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://link-hub.net/") ||
       link.startsWith("https://best-links.org/") ||
       link.startsWith("https://justpaste.it/") ||
-      link.startsWith("https://pastehill.com/")
+      link.startsWith("https://pastehill.com/") ||
+      link.startsWith("https://loot-link.com/") // loot-link bypass.vip
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.result; // Mengambil hanya result dari response
+      result = response.data.result; // Mengambil hanya "result" dari bypass.vip
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
