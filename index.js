@@ -1,9 +1,16 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors"); // Import CORS
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
+
+app.use(cors()); // Enable CORS for all routes
+
+app.get("/", (req, res) => {
+  res.json({ message: "Invalid Endpoint" });
+});
 
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
@@ -126,5 +133,5 @@ app.get("/kingbypass", async (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
