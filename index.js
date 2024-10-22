@@ -101,7 +101,9 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://justpaste.it/") ||
       link.startsWith("https://pastehill.com/") ||
       link.startsWith("https://loot-link.com/") || // loot-link bypass.vip
-      link.startsWith("https://www.ytsubme.com/s2u/") // ytsubme bypass.vip
+      link.startsWith("https://www.ytsubme.com/s2u/") || // ytsubme bypass.vip
+      link.startsWith("https://direct-link.net/") || // direct-link bypass.vip
+      link.startsWith("https://linkvertise.com/") // linkvertise bypass.vip
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
