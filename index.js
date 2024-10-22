@@ -1,12 +1,12 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors"); // Import CORS
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
 
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({ message: "Invalid Endpoint" });
@@ -21,7 +21,20 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    if (link.startsWith("https://rekonise.com/")) {
+    if (link.startsWith("https://loot-link.com/s?") && link.includes("&r=")) {
+      // Tangkap parameter 'r' dari URL
+      const rParam = new URL(link).searchParams.get("r");
+
+      if (rParam) {
+        // Gunakan API untuk mendecode parameter 'r'
+        const response = await axios.get(
+          `https://skybypass.vercel.app/decode?url=${encodeURIComponent(rParam)}&api_key=top`
+        );
+        result = response.data.decoded_url;
+      } else {
+        return res.status(400).json({ result: "Parameter 'r' not found in the URL" });
+      }
+    } else if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
@@ -35,12 +48,12 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
-      result = response.data.result; // Use this API for 'a/39097'
+      result = response.data.result;
     } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
       const response = await axios.get(
         `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
       );
-      result = response.data.key; // Use this API for 'a/8'
+      result = response.data.key;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
         `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
@@ -66,12 +79,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
       );
-      result = response.data.Result; // Get "Result" from Quantum API
-    } else if (link.startsWith("https://loot-link.com/s?") && link.includes("&r=")) {
-      const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
-      );
-      result = response.data.decoded_url; // Use the "decoded_url" field
+      result = response.data.Result;
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
@@ -104,15 +112,15 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://best-links.org/") ||
       link.startsWith("https://justpaste.it/") ||
       link.startsWith("https://pastehill.com/") ||
-      link.startsWith("https://loot-link.com/") || // loot-link bypass.vip
-      link.startsWith("https://www.ytsubme.com/s2u/") || // ytsubme bypass.vip
-      link.startsWith("https://direct-link.net/") || // direct-link bypass.vip
-      link.startsWith("https://linkvertise.com/") // linkvertise bypass.vip
+      link.startsWith("https://loot-link.com/") ||
+      link.startsWith("https://www.ytsubme.com/s2u/") ||
+      link.startsWith("https://direct-link.net/") ||
+      link.startsWith("https://linkvertise.com/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.result; // Get "result" from bypass.vip
+      result = response.data.result;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -138,7 +146,6 @@ app.get("/kingbypass", async (req, res) => {
   }
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
