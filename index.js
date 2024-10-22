@@ -21,20 +21,7 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    if (link.startsWith("https://loot-link.com/s?") && link.includes("&r=")) {
-      // Tangkap parameter 'r' dari URL
-      const rParam = new URL(link).searchParams.get("r");
-
-      if (rParam) {
-        // Gunakan API untuk mendecode parameter 'r'
-        const response = await axios.get(
-          `https://skybypass.vercel.app/decode?url=${encodeURIComponent(rParam)}&api_key=top`
-        );
-        result = response.data.decoded_url;
-      } else {
-        return res.status(400).json({ result: "Parameter 'r' not found in the URL" });
-      }
-    } else if (link.startsWith("https://rekonise.com/")) {
+    if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
@@ -46,9 +33,9 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
       const response = await axios.get(
-        `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
+        `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
       );
-      result = response.data.result;
+      result = response.data.key; // Mengambil respons key dari API ini
     } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
       const response = await axios.get(
         `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
