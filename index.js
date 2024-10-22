@@ -31,16 +31,16 @@ app.get("/kingbypass", async (req, res) => {
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
-      const response = await axios.get(
-        `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
-      );
-      result = response.data.key;
     } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
       const response = await axios.get(
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
-      result = response.data.key;
+      result = response.data.result; // Use this API for 'a/39097'
+    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
+      const response = await axios.get(
+        `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.key; // Use this API for 'a/8'
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
         `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
@@ -66,7 +66,12 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
       );
-      result = response.data.Result; // Mengambil "Result" dari Quantum API
+      result = response.data.Result; // Get "Result" from Quantum API
+    } else if (link.startsWith("https://loot-link.com/s?") && link.includes("&r=")) {
+      const response = await axios.get(
+        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
+      );
+      result = response.data.decoded_url; // Use the "decoded_url" field
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
@@ -107,7 +112,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.result; // Mengambil hanya "result" dari bypass.vip
+      result = response.data.result; // Get "result" from bypass.vip
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
