@@ -31,8 +31,7 @@ app.get("/kingbypass", async (req, res) => {
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=") ||
-               link.startsWith("https://gateway.platoboost.com/a/2?id=")) {
+    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
       const response = await axios.get(
         `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
       );
