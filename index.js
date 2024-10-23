@@ -31,12 +31,6 @@ app.get("/kingbypass", async (req, res) => {
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://loot-link.com/") && link.includes("&r=")) {
-      // Added support for loot-link with r parameter using SkyBypass
-      const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
-      );
-      result = response.data.decoded_url;
     } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
       const response = await axios.get(
         `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
