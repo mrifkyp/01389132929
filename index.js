@@ -35,7 +35,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
       );
-      result = response.data.key; // Mengambil respons key dari API ini
+      result = response.data.key;
     } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
       const response = await axios.get(
         `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
@@ -78,7 +78,7 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://rentry.co/") ||
       link.startsWith("https://tinylink.onl/") ||
       link.startsWith("https://pastelink.net/") ||
-      link.startsWith("https://lootdest.com/") ||
+      link.startsWith("https://lootdest.org/") || // lootdest.org added here
       link.startsWith("https://work.ink/") ||
       link.startsWith("https://link-center.net/") ||
       link.startsWith("https://link-target.net/") ||
