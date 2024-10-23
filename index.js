@@ -36,7 +36,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
       );
-      result = response.data.result;
+      result = response.data.decoded_url;
     } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
       const response = await axios.get(
         `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
