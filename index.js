@@ -54,7 +54,8 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (
       link.startsWith("https://sub4unlock.io/") ||
-      link.startsWith("https://sub2unlock.io/")
+      link.startsWith("https://sub2unlock.io/") ||
+      link.startsWith("https://rkns.link/")
     ) {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
