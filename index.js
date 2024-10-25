@@ -21,12 +21,8 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    if (link.startsWith("https://social-unlock.com/")) {
-      const response = await axios.get(
-        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
-      );
-      result = response.data.result;
-    } else if (link.startsWith("https://rekonise.com/")) {
+    // Handle various link types
+    if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
@@ -34,16 +30,6 @@ app.get("/kingbypass", async (req, res) => {
     } else if (link.startsWith("https://mobile.codex.lol")) {
       const response = await axios.get(
         `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
-      );
-      result = response.data.key;
-    } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
-      const response = await axios.get(
-        `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
-      );
-      result = response.data.key;
-    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
-      const response = await axios.get(
-        `https://delta-new.vercel.app/api/delta?url=${encodeURIComponent(link)}`
       );
       result = response.data.key;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
@@ -66,12 +52,14 @@ app.get("/kingbypass", async (req, res) => {
         `https://nicuse.vercel.app/nicuse?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://controlc.com/") || 
-               link.startsWith("https://raw.githubusercontent.com/")) {
+    } else if (
+      link.startsWith("https://sub4unlock.io/") ||
+      link.startsWith("https://sub2unlock.io/")
+    ) {
       const response = await axios.get(
-        `https://quantum-onyx-api.vercel.app/QuantumBypass?link=${encodeURIComponent(link)}&QuantumKey=QuantumOnyxKEY-32fdahyf32y3eqe9`
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.Result;
+      result = response.data.result;
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
@@ -83,15 +71,12 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://rentry.co/") ||
       link.startsWith("https://tinylink.onl/") ||
       link.startsWith("https://pastelink.net/") ||
-      link.startsWith("https://lootdest.org/") || // lootdest.org added here
+      link.startsWith("https://lootdest.org/") ||
       link.startsWith("https://work.ink/") ||
       link.startsWith("https://link-center.net/") ||
       link.startsWith("https://link-target.net/") ||
       link.startsWith("https://mboost.me/") ||
-      link.startsWith("https://sub2unlock.com/") ||
       link.startsWith("https://sub2unlock.net/") ||
-      link.startsWith("https://sub2unlock.io/") ||
-      link.startsWith("https://sub4unlock.io/") ||
       link.startsWith("https://boost.ink/") ||
       link.startsWith("https://socialwolvez.com/") ||
       link.startsWith("https://unlocknow.net/") ||
@@ -107,7 +92,9 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://loot-link.com/") ||
       link.startsWith("https://www.ytsubme.com/") ||
       link.startsWith("https://direct-link.net/") ||
-      link.startsWith("https://linkvertise.com/")
+      link.startsWith("https://linkvertise.com/") ||
+      link.startsWith("https://sub2unlock.com/") ||
+      link.startsWith("https://sub4unlock.net/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
@@ -131,7 +118,7 @@ app.get("/kingbypass", async (req, res) => {
     });
 
     return res.status(200).json({ result });
-
+    
   } catch (error) {
     console.error("Failed to bypass url:", error.message);
     return res.status(500).json({ error: error.message });
@@ -140,4 +127,4 @@ app.get("/kingbypass", async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-});
+})
