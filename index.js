@@ -39,9 +39,9 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
       const response = await axios.get(
-        `https://trigon.vercel.app/trigon?url=${encodeURIComponent(link)}`
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
       );
-      result = response.data.key;
+      result = response.data.result;
     } else if (link.startsWith("https://getkey.relzscript.xyz/redirect.php?hwid=")) {
       const response = await axios.get(
         `https://zaneru-official.vercel.app/api/bypass/relzhub?link=${encodeURIComponent(link)}&api_key=zaneru-official`
