@@ -108,6 +108,11 @@ app.get("/kingbypass", async (req, res) => {
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
       result = response.data.result;
+    } else if (link.startsWith("https://loot-link.com/s?fJjn&r=")) {
+      const response = await axios.get(
+        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
+      );
+      result = response.data.decoded_url;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
