@@ -21,7 +21,12 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    if (link.startsWith("https://rekonise.com/")) {
+    if (link.startsWith("https://social-unlock.com/")) {
+      const response = await axios.get(
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.result;
+    } else if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
@@ -108,11 +113,6 @@ app.get("/kingbypass", async (req, res) => {
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
       result = response.data.result;
-    } else if (link.startsWith("https://loot-link.com/s?fJjn&r=")) {
-      const response = await axios.get(
-        `https://skybypass.vercel.app/decode?url=${encodeURIComponent(link)}&api_key=top`
-      );
-      result = response.data.decoded_url;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -131,7 +131,7 @@ app.get("/kingbypass", async (req, res) => {
     });
 
     return res.status(200).json({ result });
-    
+
   } catch (error) {
     console.error("Failed to bypass url:", error.message);
     return res.status(500).json({ error: error.message });
