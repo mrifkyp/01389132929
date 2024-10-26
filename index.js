@@ -103,6 +103,16 @@ app.get("/kingbypass", async (req, res) => {
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
       result = response.data.result;
+    } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
+      const response = await axios.get(
+        `http://fi6.bot-hosting.net:21501/cryptic?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.key; // Assuming the response has a 'key' field
+    } else if (link.startsWith("https://gateway.platoboost.com/a/8?id=")) {
+      const response = await axios.get(
+        `https://bypass-delta-beta.vercel.app/api/delta?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.key; // Assuming the response has a 'result' field
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -130,4 +140,4 @@ app.get("/kingbypass", async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-})
+});
