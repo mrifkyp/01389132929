@@ -88,7 +88,8 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://sub2unlock.com/") ||
       link.startsWith("https://sub4unlock.net/") ||
       link.startsWith("https://sub4unlock.io/") ||
-      link.startsWith("https://sub2unlock.io/")
+      link.startsWith("https://sub2unlock.io/") ||
+      link.startsWith("https://sub2get.com/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
