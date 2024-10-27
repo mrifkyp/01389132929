@@ -53,17 +53,6 @@ app.get("/kingbypass", async (req, res) => {
       );
       result = response.data.key;
     } else if (
-      link.startsWith("https://sub4unlock.io/") ||
-      link.startsWith("https://sub2unlock.io/") ||
-      link.startsWith("https://rkns.link/") ||
-      link.startsWith("https://social-unlock.com/") ||
-      link.startsWith("https://sub2get.com/")
-    ) {
-      const response = await axios.get(
-        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
-      );
-      result = response.data.result;
-    } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
       link.startsWith("https://adfoc.us/") ||
@@ -97,7 +86,9 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://direct-link.net/") ||
       link.startsWith("https://linkvertise.com/") ||
       link.startsWith("https://sub2unlock.com/") ||
-      link.startsWith("https://sub4unlock.net/")
+      link.startsWith("https://sub4unlock.net/") ||
+      link.startsWith("https://sub4unlock.io/") ||
+      link.startsWith("https://sub2unlock.io/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
