@@ -34,7 +34,7 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
-        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
+        `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
       );
       result = response.data.result;
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
