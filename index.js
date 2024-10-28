@@ -6,7 +6,21 @@ const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
 
+// Daftar IP yang diblokir
+const blockedIPs = ["44.210.150.188", "18.207.250.100"];
+
 app.use(cors());
+
+// Middleware untuk memblokir IP tertentu
+app.use((req, res, next) => {
+  const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+  if (blockedIPs.includes(userIP)) {
+    return res.status(403).json({ error: "YOUR IP IS BLACKLISTED" });
+  }
+
+  next();
+});
 
 app.get("/", (req, res) => {
   res.json({ message: "Invalid Endpoint" });
@@ -14,8 +28,8 @@ app.get("/", (req, res) => {
 
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
-  const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress; // Mendapatkan IP pengguna
-  
+  const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
   if (!link) {
     return res.status(400).json({ result: "Url Needed" });
   }
