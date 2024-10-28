@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
 
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
+  const userIP = req.ip;  // Mengambil alamat IP pengguna
+  
   if (!link) {
     return res.status(400).json({ result: "Url Needed" });
   }
@@ -108,28 +110,31 @@ app.get("/kingbypass", async (req, res) => {
 
     console.log("Success:", result);
 
-    const embed = [
-      {
-        title: "Bypass Successful",
-        color: 5174599,
-        footer: {
-          text: `📅 ${new Date().toLocaleString()}`,
+    // Mengirim embed ke Webhook Discord
+    const embed = {
+      title: "Bypass Successful",
+      color: 5174599,
+      fields: [
+        {
+          name: "IP Address",
+          value: userIP,
         },
-        fields: [
-          {
-            name: "Bypassed Link",
-            value: link,
-          },
-          {
-            name: "Result",
-            value: result,
-          },
-        ],
+        {
+          name: "Original URL",
+          value: link,
+        },
+        {
+          name: "Bypass Result",
+          value: result,
+        },
+      ],
+      footer: {
+        text: `📅 ${new Date().toLocaleString()}`,
       },
-    ];
+    };
 
     await axios.post(webhookURL, {
-      embeds: embed,
+      embeds: [embed],
     });
 
     return res.status(200).json({ result });
