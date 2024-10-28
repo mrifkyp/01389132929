@@ -73,7 +73,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://notss.vercel.app/decode?url=${encodeURIComponent(link)}`
       );
-      result = response.data.result;
+      result = response.data.decoded_url;
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
