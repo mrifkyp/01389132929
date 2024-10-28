@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
   if (blockedIPs.includes(userIP)) {
-    return res.status(403).json({ error: "YOUR IP IS BLACKLISTED" });
+    return res.status(403).json({ result: "YOUR IP IS BLACKLISTED" });
   }
 
   next();
