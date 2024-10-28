@@ -68,6 +68,12 @@ app.get("/kingbypass", async (req, res) => {
         `https://nicuse.vercel.app/nicuse?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
       result = response.data.key;
+    } else if (link.startsWith("https://loot-link.com/s?fJjn&r=")) {
+      // New API for loot-link URLs with "r" parameter
+      const response = await axios.get(
+        `https://notss.vercel.app/decode?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.result;
     } else if (
       link.startsWith("https://bit.ly/") ||
       link.startsWith("https://tiny.cc/") ||
