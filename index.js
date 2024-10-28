@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
 
 // Daftar IP yang diblokir
-const blockedIPs = ["44.210.150.188", "18.207.250.100"];
+const blockedIPs = ["44.210.150.188", "18.207.250.100", "202.51.199.221"];
 
 app.use(cors());
 
