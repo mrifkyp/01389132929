@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 
 app.get("/kingbypass", async (req, res) => {
   const { link } = req.query;
-  const userIP = req.ip;  // Mengambil alamat IP pengguna
+  const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress; // Mendapatkan IP pengguna
   
   if (!link) {
     return res.status(400).json({ result: "Url Needed" });
@@ -23,7 +23,7 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
-    // Handle various link types
+    // Handle berbagai jenis link
     if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
