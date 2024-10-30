@@ -5,33 +5,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o2zo0m1WZj30U18EwXwfbvEUTQkjQoRsNWNU6u4OIAofXRBo9HfTYuwy8kXzlU";
-const apiKeyIPGeo = "413addd19bd94907928e8b11676ef6c2"; // API key dari ipgeolocation.io
 
 // Daftar IP yang diblokir
 const blockedIPs = ["44.210.150.188", "18.207.250.100"];
 
 app.use(cors());
 
-// Middleware untuk memblokir IP tertentu dan mendeteksi VPN
-app.use(async (req, res, next) => {
+// Middleware untuk memblokir IP tertentu
+app.use((req, res, next) => {
   const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
   // Cek apakah IP ada dalam daftar yang diblokir
   if (blockedIPs.includes(userIP)) {
     return res.status(403).json({ result: "YOUR IP GOT BLACKLISTED" });
-  }
-
-  try {
-    // Memeriksa VPN dengan ipgeolocation.io
-    const geoResponse = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKeyIPGeo}&ip=${userIP}`);
-    const isVPN = geoResponse.data.is_vpn;
-
-    if (isVPN) {
-      return res.status(403).json({ result: "VPN Detected - Access Denied" });
-    }
-  } catch (error) {
-    console.error("Error checking VPN status:", error.message);
-    return res.status(500).json({ error: "VPN check failed" });
   }
 
   next();
@@ -126,7 +112,7 @@ app.get("/kingbypass", async (req, res) => {
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
       result = response.data.result;
-      else if (link.startsWith("https://rkns.link/")) {
+    } else if (link.startsWith("https://rkns.link/")) {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
