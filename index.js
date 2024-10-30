@@ -126,6 +126,11 @@ app.get("/kingbypass", async (req, res) => {
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
       );
       result = response.data.result;
+      else if (link.startsWith("https://rkns.link/")) {
+      const response = await axios.get(
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
+      );
+      result = response.data.result;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
