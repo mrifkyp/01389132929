@@ -46,7 +46,7 @@ app.get("/kingbypass", async (req, res) => {
       result = response.data.key;
     } else if (link.startsWith("https://mobile.codex.lol")) {
       const response = await axios.get(
-        `http://45.90.12.32:6030/api/bypass?link=${encodeURIComponent(link)}`
+        `https://bypass-all.vercel.app/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
       result = response.data.key;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
@@ -62,11 +62,6 @@ app.get("/kingbypass", async (req, res) => {
     } else if (link.startsWith("https://getkey.relzscript.xyz/redirect.php?hwid=")) {
       const response = await axios.get(
         `https://zaneru-official.vercel.app/api/bypass/relzhub?link=${encodeURIComponent(link)}&api_key=zaneru-official`
-      );
-      result = response.data.key;
-    } else if (link.startsWith("https://nicuse.xyz/getkey")) {
-      const response = await axios.get(
-        `https://nicuse.vercel.app/nicuse?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
       result = response.data.key;
     } else if (
