@@ -125,7 +125,7 @@ app.get("/kingbypass", async (req, res) => {
     }
 
     if (!result) {
-      return res.status(500).json({ error: "Failed to bypass url" });
+      return res.status(500).json({ result: "Failed to bypass url" });
     }
 
     console.log("Success:", result);
