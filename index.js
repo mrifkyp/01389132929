@@ -44,7 +44,11 @@ app.get("/kingbypass", async (req, res) => {
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://mobile.codex.lol/")) {
+    } else if (
+      link.startsWith("https://mobile.codex.lol/") ||
+      link.startsWith("https://spdmteam.com/key-system-1?hwid=") ||
+      link.startsWith("https://gateway.platoboost.com/a/39097?id=")
+    ) {
       const response = await axios.get(
         `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
       );
@@ -112,11 +116,6 @@ app.get("/kingbypass", async (req, res) => {
     } else if (link.startsWith("https://rkns.link/")) {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
-      );
-      result = response.data.result;
-      } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
-      const response = await axios.get(
-        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
       );
       result = response.data.result;
       } else if (link.startsWith("https://freenote.biz/")) {
