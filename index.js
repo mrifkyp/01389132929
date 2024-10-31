@@ -14,7 +14,7 @@ app.use(cors());
 // Middleware untuk memblokir IP tertentu
 app.use((req, res, next) => {
   const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-
+  
   // Cek apakah IP ada dalam daftar yang diblokir
   if (blockedIPs.includes(userIP)) {
     return res.status(403).json({ result: "YOUR IP GOT BLACKLISTED" });
@@ -38,10 +38,15 @@ app.get("/kingbypass", async (req, res) => {
   let result;
 
   try {
+    const axiosConfig = {
+      timeout: 30000, // waktu timeout dalam milidetik (30 detik)
+    };
+
     // Handle berbagai jenis link
     if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
-        `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
+        `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`,
+        axiosConfig
       );
       result = response.data.key;
     } else if (
@@ -50,22 +55,26 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://gateway.platoboost.com/a/39097?id=")
     ) {
       const response = await axios.get(
-        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
+        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`,
+        axiosConfig
       );
       result = response.data.result;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
-        `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
+        `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`,
+        axiosConfig
       );
       result = response.data.key;
     } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
       const response = await axios.get(
-        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`,
+        axiosConfig
       );
       result = response.data.result;
     } else if (link.startsWith("https://getkey.relzscript.xyz/redirect.php?hwid=")) {
       const response = await axios.get(
-        `https://zaneru-official.vercel.app/api/bypass/relzhub?link=${encodeURIComponent(link)}&api_key=zaneru-official`
+        `https://zaneru-official.vercel.app/api/bypass/relzhub?link=${encodeURIComponent(link)}&api_key=zaneru-official`,
+        axiosConfig
       );
       result = response.data.key;
     } else if (
@@ -110,17 +119,20 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://link-hub.net/")
     ) {
       const response = await axios.get(
-        `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`
+        `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`, 
+        axiosConfig
       );
       result = response.data.result;
     } else if (link.startsWith("https://rkns.link/")) {
       const response = await axios.get(
-        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
+        `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`,
+        axiosConfig
       );
       result = response.data.result;
       } else if (link.startsWith("https://freenote.biz/")) {
       const response = await axios.get(
-        `https://kamunanya.vercel.app/api/freenote?url=${encodeURIComponent(link)}`
+        `https://kamunanya.vercel.app/api/freenote?url=${encodeURIComponent(link)}`,
+        axiosConfig
       );
       result = response.data.content;
     } else {
@@ -159,12 +171,10 @@ app.get("/kingbypass", async (req, res) => {
       },
     };
 
-    await axios.post(webhookURL, {
-      embeds: [embed],
-    });
+    await axios.post(webhookURL, { embeds: [embed] });
 
     return res.status(200).json({ result });
-    
+
   } catch (error) {
     console.error("Failed to bypass url:", error.message);
     return res.status(500).json({ error: error.message });
