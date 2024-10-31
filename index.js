@@ -39,7 +39,7 @@ app.get("/kingbypass", async (req, res) => {
 
   try {
     const axiosConfig = {
-      timeout: 30000, // waktu timeout dalam milidetik (30 detik)
+      timeout: 70000,
     };
 
     // Handle berbagai jenis link
