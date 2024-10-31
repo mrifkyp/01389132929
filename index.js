@@ -112,6 +112,11 @@ app.get("/kingbypass", async (req, res) => {
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
       );
       result = response.data.result;
+      } else if (link.startsWith("https://gateway.platoboost.com/a/39097?id=")) {
+      const response = await axios.get(
+        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
+      );
+      result = response.data.result;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
