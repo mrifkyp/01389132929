@@ -119,6 +119,11 @@ app.get("/kingbypass", async (req, res) => {
         `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
       );
       result = response.data.result;
+      } else if (link.startsWith("https://freenote.biz/")) {
+      const response = await axios.get(
+        `https://kamunanya.vercel.app/api/freenote?url=${encodeURIComponent(link)}`
+      );
+      result = response.data.content;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
