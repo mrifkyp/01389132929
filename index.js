@@ -44,9 +44,9 @@ app.get("/kingbypass", async (req, res) => {
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`
       );
       result = response.data.key;
-    } else if (link.startsWith("https://mobile.codex.lol")) {
+    } else if (link.startsWith("https://mobile.codex.lol/")) {
       const response = await axios.get(
-        `https://bypass-all.vercel.app/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`
+        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
       );
       result = response.data.key;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
