@@ -48,7 +48,7 @@ app.get("/kingbypass", async (req, res) => {
       const response = await axios.get(
         `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`
       );
-      result = response.data.key;
+      result = response.data.result;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
         `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`
