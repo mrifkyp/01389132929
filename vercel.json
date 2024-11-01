@@ -11,11 +11,5 @@
       "src": "(.*)",
       "dest": "/"
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://skybypass-website.vercel.app/:path*"
-    }
   ]
 }
