@@ -9,7 +9,8 @@ const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o
 // Daftar IP yang diblokir
 const blockedIPs = ["44.210.150.188", "18.207.250.100"];
 
-app.use(cors());
+// Mengizinkan CORS hanya untuk domain tertentu
+app.use(cors({ origin: "https://skybypass-website.vercel.app" }));
 
 // Middleware untuk memblokir IP tertentu
 app.use((req, res, next) => {
@@ -129,7 +130,7 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.result;
-      } else if (link.startsWith("https://freenote.biz/")) {
+    } else if (link.startsWith("https://freenote.biz/")) {
       const response = await axios.get(
         `https://kamunanya.vercel.app/api/freenote?url=${encodeURIComponent(link)}`,
         axiosConfig
