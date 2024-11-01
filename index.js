@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const timeout = require("connect-timeout"); // untuk handle timeout
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -10,6 +11,7 @@ const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o
 const blockedIPs = ["44.210.150.188", "18.207.250.100"];
 
 app.use(cors());
+app.use(timeout("70s")); // Mengatur timeout menjadi 70 detik
 
 // Middleware untuk memblokir IP tertentu
 app.use((req, res, next) => {
@@ -21,6 +23,11 @@ app.use((req, res, next) => {
   }
 
   next();
+});
+
+// Middleware untuk menangani request yang timeout
+app.use((req, res, next) => {
+  if (!req.timedout) next();
 });
 
 app.get("/", (req, res) => {
@@ -39,10 +46,10 @@ app.get("/kingbypass", async (req, res) => {
 
   try {
     const axiosConfig = {
-      timeout: 70000,
+      timeout: 70000, // Mengatur timeout axios menjadi 70 detik
     };
 
-    // Handle berbagai jenis link
+    // Penanganan berbagai jenis link
     if (link.startsWith("https://rekonise.com/")) {
       const response = await axios.get(
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`,
@@ -129,7 +136,7 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.result;
-      } else if (link.startsWith("https://freenote.biz/")) {
+    } else if (link.startsWith("https://freenote.biz/")) {
       const response = await axios.get(
         `https://kamunanya.vercel.app/api/freenote?url=${encodeURIComponent(link)}`,
         axiosConfig
@@ -179,6 +186,14 @@ app.get("/kingbypass", async (req, res) => {
     console.error("Failed to bypass url:", error.message);
     return res.status(500).json({ error: error.message });
   }
+});
+
+// Middleware untuk menangani permintaan yang timeout
+app.use((req, res, next) => {
+  if (req.timedout) {
+    return res.status(503).json({ error: "Request timed out" });
+  }
+  next();
 });
 
 app.listen(PORT, () => {
