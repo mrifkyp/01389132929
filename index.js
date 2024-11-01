@@ -57,7 +57,7 @@ app.get("/kingbypass", async (req, res) => {
     ) {
       const response = await axios.get(
         `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`,
-        axiosConfig
+        axiosConfig);
       );
       result = response.data.result;
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
