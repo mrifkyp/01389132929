@@ -142,6 +142,12 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.content;
+    } else if (link.startsWith("https://esohasl.net/")) {
+      const response = await axios.get(
+        `https://esohl.vercel.app/api/esohasl?url=${encodeURIComponent(link)}`,
+        axiosConfig
+      );
+      result = response.data.result
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
