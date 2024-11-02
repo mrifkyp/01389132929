@@ -148,6 +148,18 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.result
+      } else if (link.startsWith("https://hastebin.skyra.pw/")) {
+      const response = await axios.get(
+        `https://hastebin-mu.vercel.app/api/hastebin?url=${encodeURIComponent(link)}`,
+        axiosConfig
+      );
+      result = response.data.result
+      } else if (link.startsWith("https://paste.ee/")) {
+      const response = await axios.get(
+        `https://huwuuehw.vercel.app/api/pasteee?url=${encodeURIComponent(link)}`,
+        axiosConfig
+      );
+      result = response.data.result
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
