@@ -130,7 +130,6 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.result;
-      result = response.data.message;
     } else if (link.startsWith("https://rkns.link/")) {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}&apikey=DemonOnTop`,
