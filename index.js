@@ -202,14 +202,14 @@ app.get("/kingbypass", async (req, res) => {
 
   } catch (error) {
     console.error("Failed to bypass url:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ result: error.message });
   }
 });
 
 // Middleware untuk menangani permintaan yang timeout
 app.use((req, res, next) => {
   if (req.timedout) {
-    return res.status(503).json({ error: "Request timed out" });
+    return res.status(503).json({ result: "Request timed out" });
   }
   next();
 });
