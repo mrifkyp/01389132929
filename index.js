@@ -1,7 +1,6 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-const timeout = require("connect-timeout"); // untuk handle timeout
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,7 +10,6 @@ const webhookURL = "https://discord.com/api/webhooks/1297094586136526941/tQ2-64o
 const blockedIPs = ["44.210.150.188", "18.207.250.100", "14.192.214.105"];
 
 app.use(cors());
-app.use(timeout("70s")); // Mengatur timeout menjadi 70 detik
 
 // Middleware untuk memblokir IP tertentu
 app.use((req, res, next) => {
@@ -23,11 +21,6 @@ app.use((req, res, next) => {
   }
 
   next();
-});
-
-// Middleware untuk menangani request yang timeout
-app.use((req, res, next) => {
-  if (!req.timedout) next();
 });
 
 app.get("/", (req, res) => {
@@ -74,14 +67,14 @@ app.get("/kingbypass", async (req, res) => {
       );
       result = response.data.key;
     } else if (
-      link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) ||
+      link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=") ||
       link.startsWith("https://link-hub.net/") ||
       link.startsWith("https://direct-link.net/") ||
       link.startsWith("https://link-center.net/") ||
       link.startsWith("https://link-target.net/") ||
       link.startsWith("https://linkvertise.com/") ||
       link.startsWith("https://direct-link.net/")
-      {
+    ) {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`,
         axiosConfig
@@ -150,19 +143,19 @@ app.get("/kingbypass", async (req, res) => {
         `https://esohl.vercel.app/api/esohasl?url=${encodeURIComponent(link)}`,
         axiosConfig
       );
-      result = response.data.result
-      } else if (link.startsWith("https://hastebin.skyra.pw/")) {
+      result = response.data.result;
+    } else if (link.startsWith("https://hastebin.skyra.pw/")) {
       const response = await axios.get(
         `https://hastebin-mu.vercel.app/api/hastebin?url=${encodeURIComponent(link)}`,
         axiosConfig
       );
-      result = response.data.result
-      } else if (link.startsWith("https://paste.ee/")) {
+      result = response.data.result;
+    } else if (link.startsWith("https://paste.ee/")) {
       const response = await axios.get(
         `https://huwuuehw.vercel.app/api/pasteee?url=${encodeURIComponent(link)}`,
         axiosConfig
       );
-      result = response.data.result
+      result = response.data.result;
     } else {
       return res.status(400).json({
         result: "Url not supported to bypass",
@@ -207,14 +200,6 @@ app.get("/kingbypass", async (req, res) => {
     console.error("Failed to bypass url:", error.message);
     return res.status(500).json({ result: error.message });
   }
-});
-
-// Middleware untuk menangani permintaan yang timeout
-app.use((req, res, next) => {
-  if (req.timedout) {
-    return res.status(503).json({ result: "Request timed out" });
-  }
-  next();
 });
 
 app.listen(PORT, () => {
