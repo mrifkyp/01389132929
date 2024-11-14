@@ -59,7 +59,8 @@ app.get("/kingbypass", async (req, res) => {
     } else if (
       link.startsWith("https://mobile.codex.lol/") ||
       link.startsWith("https://spdmteam.com/key-system-1?hwid=") ||
-      link.startsWith("https://gateway.platoboost.com/a/39097?id=")
+      link.startsWith("https://gateway.platoboost.com/a/39097?id=") ||
+      link.startsWith("https://keyguardian.org/")
     ) {
       const response = await axios.get(
         `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`,
@@ -72,7 +73,15 @@ app.get("/kingbypass", async (req, res) => {
         axiosConfig
       );
       result = response.data.key;
-    } else if (link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) {
+    } else if (
+      link.startsWith("https://trigonevo.fun/whitelist/index.php?HWID=")) ||
+      link.startsWith("https://link-hub.net/") ||
+      link.startsWith("https://direct-link.net/") ||
+      link.startsWith("https://link-center.net/") ||
+      link.startsWith("https://link-target.net/") ||
+      link.startsWith("https://linkvertise.com/") ||
+      link.startsWith("https://direct-link.net/")
+      {
       const response = await axios.get(
         `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(link)}`,
         axiosConfig
@@ -97,8 +106,6 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://pastelink.net/") ||
       link.startsWith("https://lootdest.org/") ||
       link.startsWith("https://work.ink/") ||
-      link.startsWith("https://link-center.net/") ||
-      link.startsWith("https://link-target.net/") ||
       link.startsWith("https://mboost.me/") ||
       link.startsWith("https://sub2unlock.net/") ||
       link.startsWith("https://boost.ink/") ||
@@ -115,15 +122,11 @@ app.get("/kingbypass", async (req, res) => {
       link.startsWith("https://pastehill.com/") ||
       link.startsWith("https://loot-link.com/") ||
       link.startsWith("https://www.ytsubme.com/") ||
-      link.startsWith("https://direct-link.net/") ||
-      link.startsWith("https://linkvertise.com/") ||
       link.startsWith("https://sub2unlock.com/") ||
       link.startsWith("https://sub4unlock.net/") ||
       link.startsWith("https://sub4unlock.io/") ||
       link.startsWith("https://sub2unlock.io/") ||
-      link.startsWith("https://sub2get.com/") ||
-      link.startsWith("https://direct-link.net/") ||
-      link.startsWith("https://link-hub.net/")
+      link.startsWith("https://sub2get.com/")
     ) {
       const response = await axios.get(
         `https://api.bypass.vip/bypass?url=${encodeURIComponent(link)}`, 
