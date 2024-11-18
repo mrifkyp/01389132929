@@ -48,18 +48,7 @@ app.get("/kingbypass", async (req, res) => {
         `https://rekonise.vercel.app/rekonise?url=${encodeURIComponent(link)}`,
         axiosConfig
       );
-      result = response.data.key;
-    } else if (
-      link.startsWith("https://mobile.codex.lol/") ||
-      link.startsWith("https://spdmteam.com/key-system-1?hwid=") ||
-      link.startsWith("https://gateway.platoboost.com/a/39097?id=") ||
-      link.startsWith("https://keyguardian.org/a/161?id=")
-    ) {
-      const response = await axios.get(
-        `https://slr.kys.gay/api/premium/bypass?url=${encodeURIComponent(link)}&apikey=SLR-FREE-PUBLIC`,
-        axiosConfig
-      );
-      result = response.data.result;
+      result = response.data.key
     } else if (link.startsWith("https://flux.li/android/external/start.php?HWID=")) {
       const response = await axios.get(
         `https://fluxus-bypass-orcin.vercel.app/api/fluxus?link=${encodeURIComponent(link)}`,
